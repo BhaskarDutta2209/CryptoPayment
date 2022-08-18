@@ -123,7 +123,7 @@ class _LoginPageState extends State<LoginPage> {
             "acknowledgement":
                 "I acknowledge that this app is just a POC and prone to various bugs",
             "github":
-                "https://github.com/BhaskarDutta2209/FlutterAppWithMetamask"
+                "https://github.com/BhaskarDutta2209/CryptoPayment"
           }
         };
         var signature = await provider.signTypeData(

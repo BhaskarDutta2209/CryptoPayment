@@ -113,7 +113,7 @@ class _LoginPageState extends State<LoginPage> {
           },
           "primaryType": "data",
           "domain": {
-            "name": "CryptoPay",
+            "name": "Crypto Payment",
             "version": "1.0",
             "chainId": _session.chainId,
           },

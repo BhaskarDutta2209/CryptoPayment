@@ -5,7 +5,8 @@ contract UPIToAddress {
     struct UserAccount {
         string name;
         string upi;
-        address accountAddress;
+        address ownerAccountAddress;
+        address receivingAccountAddress;
         bool isRegistered;
     }
 
@@ -21,17 +22,17 @@ contract UPIToAddress {
     function linkUPI(string memory _upi, string memory _name) external {
         bytes32 _hash = keccak256(abi.encodePacked(_upi));
         require(!userAccounts[_hash].isRegistered, "UPI already registered");
-        userAccounts[_hash] = UserAccount(_name, _upi, msg.sender, true);
+        userAccounts[_hash] = UserAccount(_name, _upi, msg.sender, msg.sender, true);
         emit UPIAdded(_upi, _hash, msg.sender);
     }
 
     function changeAddress(string memory _upi, address _to) external {
         bytes32 _hash = keccak256(abi.encodePacked(_upi));
         require(
-            userAccounts[_hash].accountAddress == msg.sender,
+            userAccounts[_hash].ownerAccountAddress == msg.sender,
             "You are not the owner of this UPI"
         );
-        userAccounts[_hash].accountAddress = _to;
+        userAccounts[_hash].receivingAccountAddress = _to;
     }
 
     function getUserDetails(string memory _upi) external view returns (UserAccount memory) {
@@ -41,7 +42,7 @@ contract UPIToAddress {
 
     function getAddress(string memory _upi) external view returns (address) {
         bytes32 _hash = keccak256(abi.encodePacked(_upi));
-        return userAccounts[_hash].accountAddress;
+        return userAccounts[_hash].receivingAccountAddress;
     }
 
     function getUPIHash(string memory _upi) external pure returns (bytes32) {

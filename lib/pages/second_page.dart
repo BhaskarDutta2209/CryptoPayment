@@ -29,7 +29,7 @@ class _SecondPageState extends State<SecondPage> {
       HomeWidget(
         connector: widget.connector,
         uri: widget.uri,
-        receiverAddress: widget.session.accounts[0],
+        connectedAddress: widget.session.accounts[0],
       ),
       CardsWidget(),
       PayWidget(

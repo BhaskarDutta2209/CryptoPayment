@@ -12,6 +12,7 @@ Future<TransactionState> isTransactionConfirmed(String tx) async {
 
   final res = await http.get(Uri.parse(url));
   final jsonBody = jsonDecode(res.body);
+  print(jsonBody);
   final status = jsonBody['result']['status'].toString();
   print("status => " + status.toString());
   if (status.toString() == "1") {

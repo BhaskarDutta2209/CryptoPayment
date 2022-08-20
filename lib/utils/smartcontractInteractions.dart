@@ -26,7 +26,7 @@ Future<String> sendEther(WalletConnect connector, String uri,
 }
 
 Future<String> linkUPI(WalletConnect connector, String uri,
-    String receiverAddress, String upiId, String name) async {
+    String connectedAddress, String upiId, String name) async {
   try {
     final contract = await loadContract();
     ContractFunction ethFunction = contract.function('linkUPI');
@@ -37,12 +37,35 @@ Future<String> linkUPI(WalletConnect connector, String uri,
         EthereumWalletConnectProvider(connector);
     launchUrlString(uri, mode: LaunchMode.externalApplication);
     var res = await provider.sendTransaction(
-        from: receiverAddress, to: Constants.contractAddress, data: data);
+        from: connectedAddress, to: Constants.contractAddress, data: data);
     print("linkUPI");
     print(res.toString());
     return res.toString();
   } catch (exp) {
     print("Error while linking UPI");
+    print(exp);
+    return "";
+  }
+}
+
+Future<String> changeAddress(WalletConnect connector, String uri,
+    String connectedAddress, String upiID, String newAddress) async {
+  try {
+    final contract = await loadContract();
+    ContractFunction ethFunction = contract.function('changeAddress');
+    List<dynamic> args = [upiID, EthereumAddress.fromHex(newAddress)];
+    final data = ethFunction.encodeCall(args);
+
+    EthereumWalletConnectProvider provider =
+        EthereumWalletConnectProvider(connector);
+    launchUrlString(uri, mode: LaunchMode.externalApplication);
+    var res = await provider.sendTransaction(
+        from: connectedAddress, to: Constants.contractAddress, data: data);
+    print("changeAddress");
+    print(res.toString());
+    return res.toString();
+  } catch (exp) {
+    print("Error while transfering UPI");
     print(exp);
     return "";
   }

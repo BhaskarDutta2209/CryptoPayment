@@ -119,7 +119,7 @@ class _LoginPageState extends State<LoginPage> {
           },
           "message": {
             "user": _session.accounts[0],
-            "appname": "CryptoPay",
+            "appname": "Crypto Payment",
             "acknowledgement":
                 "I acknowledge that this app is just a POC and prone to various bugs",
             "github":

@@ -6,18 +6,13 @@
 // global scope, and execute the script.
 const hre = require("hardhat");
 
-const sleep = (ms) => new Promise((res) => setTimeout(res, ms));
-
 async function main() {
   const UPIToAddressContract = await hre.ethers.getContractFactory(
     "UPIToAddress"
   );
   const upiToAddress = await UPIToAddressContract.deploy();
-  // await upiToAddress.deployed();
   await upiToAddress.deployTransaction.wait(6);
   console.log(`UPIToAddress address: ${upiToAddress.address}`);
-
-  // await sleep(10000);
 
   await hre.run("verify:verify", {
     address: upiToAddress.address,

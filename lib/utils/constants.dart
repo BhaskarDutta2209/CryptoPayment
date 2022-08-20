@@ -1,5 +1,6 @@
 class Constants {
-  static String contractAddress = "0x6bb06385cFa489480F5163558F437fa0Ff541a5C";
+  // static String contractAddress = "0x6bb06385cFa489480F5163558F437fa0Ff541a5C";
+  static String contractAddress = "0x16243760E9a5208Cf0B466d54795C633c9E9D6F2";
   static int blockTimeInSeconds = 3;
   static String awsAPIGateway =
       "bliy7xvp86.execute-api.ap-south-1.amazonaws.com";

@@ -138,7 +138,7 @@ class _PayWidgetState extends State<PayWidget> {
               );
             }
             print("Snapshot => " + snapshot.data!.toString());
-            if (snapshot.data![0][3].toString() == "false") {
+            if (snapshot.data![0][4].toString() == "false") {
               return AlertDialog(
                 title: const Text("Unregistered UPI"),
                 content:
@@ -162,7 +162,7 @@ class _PayWidgetState extends State<PayWidget> {
                   senderAddress: widget.session.accounts[0],
                   receiverName: snapshot.data![0][0].toString(),
                   receiverUPI: snapshot.data![0][1].toString(),
-                  receiverAddress: snapshot.data![0][2].toString(),
+                  receiverAddress: snapshot.data![0][3].toString(),
                   web3Client: web3client);
             }
           });
